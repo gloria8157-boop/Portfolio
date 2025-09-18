@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터랙티브 QR 코드 생성기</title>
+    <style>
+        /* 페이지 전체 스타일 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* 생성기 컨테이너 스타일 */
+        .qr-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* 텍스트 입력창 스타일 */
+        #text-input {
+            width: calc(100% - 24px); /* padding 고려 */
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
+        }
+
+        #text-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        /* QR 코드가 표시될 영역 스타일 */
+        #qrcode {
+            margin: 25px auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+            width: 256px; /* QR 코드 크기에 맞춤 */
+            height: 256px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 초기 안내 메시지 스타일 */
+        #qrcode-placeholder {
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="qr-container">
+        <h1>QR 코드 생성기 🚀</h1>
+        <p>아래 입력창에 텍스트나 URL을 입력해 보세요.</p>
+        
+        <input type="text" id="text-input" placeholder="https://www.google.com" value="https://www.google.com">
+        
+        <div id="qrcode">
+            <span id="qrcode-placeholder">QR 코드가 여기에 표시됩니다.</span>
+        </div>
+    </div>
+
+    <!-- QR 코드 생성 라이브러리 (CDN) -->
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+
+    <script>
+        // HTML 요소 가져오기
+        const textInput = document.getElementById('text-input');
+        const qrcodeContainer = document.getElementById('qrcode');
+        const qrcodePlaceholder = document.getElementById('qrcode-placeholder');
+
+        // QR 코드 생성기 인스턴스 생성
+        // new QRCode(element, options)
+        const qrcode = new QRCode(qrcodeContainer, {
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H // 에러 복원 레벨
+        });
+
+        // QR 코드를 생성하는 함수
+        function generateQRCode() {
+            // 입력된 텍스트 가져오기 (앞뒤 공백 제거)
+            const text = textInput.value.trim();
+
+            if (text) {
+                qrcodePlaceholder.style.display = 'none'; // 안내 문구 숨기기
+                qrcode.makeCode(text); // 입력된 텍스트로 QR 코드 생성
+            } else {
+                qrcode.clear(); // 입력창이 비었으면 QR 코드 지우기
+                qrcodePlaceholder.style.display = 'block'; // 안내 문구 다시 보이기
+            }
+        }
+
+        // --- 이벤트 리스너 설정 ---
+
+        // 1. 키보드를 입력할 때마다 실시간으로 QR 코드 생성
+        textInput.addEventListener('input', generateQRCode);
+
+        // 2. 페이지가 처음 로드될 때 예시 값으로 QR 코드 생성
+        window.addEventListener('load', generateQRCode);
+
+    </script>
+
+</body>
+</html>
