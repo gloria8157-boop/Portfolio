@@ -6,4 +6,4 @@ AI 개발자
 - AI, ML, DL
 
 ## 라이브 데모
-- https://gloria8157-boop.github.io/Portfolio/
+- 포트폴리오 사이트 : https://gloria8157-boop.github.io/Portfolio/
