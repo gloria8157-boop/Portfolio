@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 개발자 이예진 | 포트폴리오</title>
+    
+    <!-- Google Fonts: 타이포그래피를 위한 글꼴 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 모든 스타일을 여기에 정의합니다 -->
+    <style>
+        /* CSS 변수를 사용하여 색상과 폰트를 관리합니다 */
+        :root {
+            --bg-dark-navy: #0a192f;
+            --bg-light-navy: #112240;
+            --text-lightest: #ccd6f6;
+            --text-dark: #8892b0;
+            --accent-mint: #64ffda;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Noto Sans KR', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        /* 기본 스타일 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark-navy);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 전체 레이아웃 컨테이너 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--text-lightest);
+            font-weight: 700;
+        }
+        
+        /* 섹션 제목 스타일 */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-mint);
+            border-radius: 2px;
+        }
+
+        /* 네비게이션 바 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: top var(--transition-speed) ease-in-out;
+        }
+
+        .nav-logo {
+            color: var(--accent-mint);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-lightest);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-mint);
+        }
+
+        /* 히어로(메인) 섹션 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .hero-text .intro {
+            color: var(--accent-mint);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(40px, 8vw, 80px); /* 화면 크기에 따라 글자 크기 조절 */
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text .subtitle {
+            font-size: clamp(40px, 8vw, 70px);
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            background-color: transparent;
+            color: var(--accent-mint);
+            border: 1px solid var(--accent-mint);
+            padding: 1rem 1.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* 프로젝트 섹션 */
+        #projects {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            background-color: var(--bg-light-navy);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
+            transition: transform var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            margin-bottom: 1rem;
+        }
+
+        .project-tags span {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--accent-mint);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .project-links a {
+            color: var(--text-lightest);
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            transition: color var(--transition-speed);
+        }
+
+        .project-links a:hover {
+            color: var(--accent-mint);
+        }
+        
+        .project-links svg {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+
+        /* 기술 스택 섹션 */
+        #skills {
+            padding: 100px 0;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background-color: var(--bg-light-navy);
+            color: var(--text-lightest);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+        
+        .skill-item:hover {
+            background-color: var(--accent-mint);
+            color: var(--bg-dark-navy);
+        }
+
+        /* 연락처(푸터) 섹션 */
+        #contact {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        #contact h2 {
+            font-size: 3rem;
+        }
+
+        #contact .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-mint);
+            margin-bottom: 1.5rem;
+        }
+
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .contact-links {
+            margin-bottom: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--text-lightest);
+            font-size: 1.8rem;
+            margin: 0 1rem;
+            transition: color var(--transition-speed), transform var(--transition-speed);
+            display: inline-block;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent-mint);
+            transform: translateY(-5px);
+        }
+        
+        .contact-links svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+        }
+        
+        /* 모바일 반응형 디자인 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                /* 모바일에서는 햄버거 메뉴로 대체할 수 있습니다. 여기서는 간단히 숨깁니다. */
+                display: none; 
+            }
+            .hero-text h1, .hero-text .subtitle {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">YJLEE.AI</a>
+        <ul class="nav-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- 메인(히어로) 섹션 -->
+    <header class="hero" id="about">
+        <div class="hero-text">
+            <p class="intro">안녕하세요, 저는</p>
+            <h1>이예진입니다.</h1>
+            <h2 class="subtitle">AI로 더 나은 세상을 만듭니다.</h2>
+            <p>데이터 속에 숨겨진 가치를 발견하고, 비즈니스의 성장을 이끄는 AI 모델을 개발하는 것을 목표로 하고 있습니다. 특히 컴퓨터 비전과 자연어 처리 분야에 깊은 관심을 가지고 있습니다.</p>
+            <a href="mailto:your-email@example.com" class="btn">저에게 연락하기</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 기술 스택 섹션 -->
+        <section id="skills">
+            <h2 class="section-title">SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Python</div>
+                <div class="skill-item">PyTorch</div>
+                <div class="skill-item">TensorFlow</div>
+                <div class="skill-item">Scikit-learn</div>
+                <div class="skill-item">Pandas</div>
+                <div class="skill-item">NumPy</div>
+                <div class="skill-item">OpenCV</div>
+                <div class="skill-item">Docker</div>
+                <div class="skill-item">AWS</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">Git & Github</div>
+            </div>
+        </section>
+
+        <!-- 프로젝트 섹션 -->
+        <section id="projects">
+            <h2 class="section-title">PROJECTS</h2>
+            <div class="project-grid">
+                
+                <!-- 프로젝트 1 -->
+                <article class="project-card">
+                    <img src="https://placehold.co/600x400/112240/64ffda?text=Object+Detection" alt="실시간 객체 탐지 시스템 썸네일" class="project-img">
+                    <div class="project-content">
+                        <h3>실시간 객체 탐지 시스템</h3>
+                        <p>YOLOv5 모델을 기반으로 CCTV 영상에서 특정 객체를 실시간으로 탐지하고 추적하는 시스템을 개발하여 보안 효율성을 30% 증대시켰습니다.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>PyTorch</span>
+                            <span>OpenCV</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank" title="GitHub Repository">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </a>
+                            <a href="#" target="_blank" title="Live Demo">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 프로젝트 2 -->
+                <article class="project-card">
+                    <img src="https://placehold.co/600x400/112240/64ffda?text=Sentiment+Analysis" alt="감성 분석 모델 썸네일" class="project-img">
+                    <div class="project-content">
+                        <h3>영화 리뷰 감성 분석 모델</h3>
+                        <p>KoBERT 모델을 파인튜닝하여 한국어 영화 리뷰의 긍/부정을 예측하는 모델을 개발했습니다. 92%의 정확도를 달성하여 서비스에 적용했습니다.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>TensorFlow</span>
+                            <span>HuggingFace</span>
+                        </div>
+                        <div class="project-links">
+                             <a href="#" target="_blank" title="GitHub Repository">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 프로젝트 3 -->
+                <article class="project-card">
+                    <img src="https://placehold.co/600x400/112240/64ffda?text=Generative+AI" alt="이미지 생성 AI 썸네일" class="project-img">
+                    <div class="project-content">
+                        <h3>GAN 기반 이미지 생성 AI</h3>
+                        <p>StyleGAN2 아키텍처를 활용하여 세상에 없는 사람의 얼굴 이미지를 생성하는 모델을 학습시켰습니다. 생성된 이미지는 높은 현실성을 보여줍니다.</p>
+                        <div class="project-tags">
+                            <span>PyTorch</span>
+                            <span>GAN</span>
+                            <span>AWS EC2</span>
+                        </div>
+                        <div class="project-links">
+                             <a href="#" target="_blank" title="GitHub Repository">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터(연락처) -->
+    <footer id="contact">
+        <h2 class="section-title">CONTACT</h2>
+        <p class="subtitle">Get In Touch</p>
+        <p>새로운 기회에 항상 열려있습니다. 함께 성장할 기회를 기다립니다. <br>언제든지 편하게 연락 주세요.</p>
+        <a href="mailto:your-email@example.com" class="btn">이메일 보내기</a>
+        <div class="contact-links" style="margin-top: 3rem;">
+            <a href="#" target="_blank" title="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="#" target="_blank" title="LinkedIn">
+                <svg xmlns="http://www.w.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+        </div>
+        <p class="footer-note">Designed & Built by Yejin Lee</p>
+    </footer>
+
+</body>
+</html>
+
+
+
